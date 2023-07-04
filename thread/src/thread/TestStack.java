@@ -6,45 +6,42 @@ public class TestStack implements Runnable {
 
 	private MyStack myStack;
 	
+	
 	{
 		myStack=new MyStack();
 	}
 
+	public void pushIt(char ch) {
+		try {
+			myStack.push(ch);
+		} catch (OutOfBoundException e) {
+			
+			System.err.println(e.getErrorMessage());
+		}	
+	}
+	
+	public void popIt() {
+		try {
+			System.out.println(myStack.pop());
+		} catch (OutOfBoundException e) {
+			
+			System.err.println(e.getErrorMessage());
+		}
+	}
+	
 	@Override
 	public void run(){
 //		Push
-		try {
-			myStack.push('a');
-		} catch (OutOfBoundException e) {
-			// TODO Auto-generated catch block
-			System.err.println(e.getErrorMessage());
-		}
-		try {
-			myStack.push('b');
-		} catch (OutOfBoundException e) {
-			// TODO Auto-generated catch block
-			System.err.println(e.getErrorMessage());
-		}
-		try {
-			myStack.push('c');
-		} catch (OutOfBoundException e) {
-			// TODO Auto-generated catch block
-			System.err.println(e.getErrorMessage());
-		}
+		pushIt('a');
+		pushIt('b');
+		pushIt('c');
+		pushIt('d');
+		pushIt('e');
 		
 //		Pop
-		try {
-			System.out.println(myStack.pop());
-		} catch (OutOfBoundPop e) {
-			// TODO Auto-generated catch block
-			System.err.println(e.getErrorMessage());
-		}
-		try {
-			System.out.println(myStack.pop());
-		} catch (OutOfBoundPop e) {
-			// TODO Auto-generated catch block
-			System.err.println(e.getErrorMessage());
-		}
+		popIt();
+		popIt();
+		popIt();
 		
 	}
 		
