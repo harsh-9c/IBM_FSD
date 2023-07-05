@@ -3,6 +3,7 @@ package com.ibm.customer_project.service;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 import com.ibm.customer_project.factory.MyConnectionFactory;
 import com.ibm.customer_project.model.Customer;
@@ -129,6 +130,51 @@ private MyConnectionFactory myConnectionFactory=null;
 			return customer;
 			
 		}
+		
+	}
+
+//	6. Delete customer by id
+	
+	@Override
+	public void deleteCustomerById(int id) throws SQLException {
+		PreparedStatement pStatement=null;
+		pStatement=connection.prepareStatement("select * from customers where customer_id=?");
+		pStatement.setInt(1, id);
+        ResultSet rs=pStatement.executeQuery();
+        
+        while(rs.next()) {
+        	customers.add(new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+        }
+		
+		if(customers.isEmpty()) {
+			System.out.printf("customer with ID=%d does not exist ", id);
+		}
+		else {
+			pStatement = connection.prepareStatement("delete from customers where customer_id=?");
+			pStatement.setInt(1, id);
+			pStatement.executeUpdate();
+			System.out.printf("customer with ID=%d removed", id);
+		}
+		
+	}
+	
+//	7. Delete all customers
+
+	@Override
+	public void deleteAllCustomers() throws SQLException {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Are you sure to delete all customers(yes/no)?");
+		String str=sc.next();
+		
+		if(str.equals("yes")) {
+			PreparedStatement pStatement = null;
+			pStatement = connection.prepareStatement("delete from customers");
+			pStatement.executeUpdate();
+			System.out.println("All customers removed successfully");
+		}
+		else {
+			System.out.println("Operation aborted!");
+		}		
 		
 	}
 

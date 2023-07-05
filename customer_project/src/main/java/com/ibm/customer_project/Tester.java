@@ -71,6 +71,9 @@ public class Tester {
 				System.out.println("3. Find customer by Id");
 				System.out.println("4. Find customer by first name");	
 				System.out.println("5. Update customer by Id");
+				System.out.println("6. Delete customer by Id");
+				System.out.println("7. Delete all customers");
+				System.out.println("0. Close the session\n");
 				System.out.println("Enter your choice: ");
 						
 				choice=sc.nextInt();
@@ -134,6 +137,15 @@ public class Tester {
 					  else{
 						System.out.println("Customer updated:\n"+customer2);
 					  }
+					 break;
+				case 6:
+					System.out.println("Enter customer id to delete: ");
+					int id4=sc.nextInt();
+					service.deleteCustomerById(id4);
+					break;
+				case 7:
+					service.deleteAllCustomers();
+					break;
 				case 0:
 					System.out.println("Session ended");
 					System.exit(1);
