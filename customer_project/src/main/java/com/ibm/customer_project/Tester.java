@@ -69,13 +69,23 @@ public class Tester {
 			
 			Customer customer=service.findCustomerById(2);
 			if(customer==null) {
-				System.out.println("Customer with given id not exist!");
+				System.out.println("Customer with given id does not exist!");
 			}
 			else {
 				
-				System.out.println("customer found: "+customer);
+				System.out.println("customer found:\n"+customer);
 			}
 //					
+			List<Customer> l2=service.findCustomerByFirstName("john");
+			if(l2.isEmpty()) {
+				System.out.println("Customer with given first name does not exist!");
+			}
+			else {	
+				for(Customer c:l2) {
+					System.out.println("Customers with given first name:\n"+c);
+				}
+			}
+			
 ////			
 		} catch (Exception e) {
 			

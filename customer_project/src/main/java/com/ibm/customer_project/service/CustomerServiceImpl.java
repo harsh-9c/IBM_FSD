@@ -55,6 +55,8 @@ private MyConnectionFactory myConnectionFactory=null;
 
 		return customer;
 	}
+	
+//	3. Find customer by id
 
 	@Override
 	public Customer findCustomerById(int id) throws SQLException {
@@ -75,6 +77,30 @@ private MyConnectionFactory myConnectionFactory=null;
 			return customers.get(0);
 		}
         
+	}
+	
+//	4. Find customer by first name
+
+	@Override
+	public List<Customer> findCustomerByFirstName(String firstName) throws SQLException {
+		PreparedStatement pStatement=null;
+		pStatement=connection.prepareStatement("select * from customers where first_name=?");
+		pStatement.setString(1, firstName);
+        ResultSet rs=pStatement.executeQuery();
+        
+        List<Customer> c=new ArrayList<Customer>();
+        
+        while(rs.next()) {
+        	c.add(new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+        }
+        
+        if(c.isEmpty()) {
+        	return null;
+        }
+        else {
+        	return c;
+        }
+		
 	}
 
 }
