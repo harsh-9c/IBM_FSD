@@ -14,5 +14,7 @@ public interface CustomerService {
 	public Customer findCustomerById(int id) throws SQLException;
 	
 	public List<Customer> findCustomerByFirstName(String firstName) throws SQLException;
+	
+	public Customer updateCustomer(int id,Customer customer) throws SQLException;
 
 }

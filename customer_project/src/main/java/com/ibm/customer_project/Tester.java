@@ -1,9 +1,6 @@
 package com.ibm.customer_project;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 import java.io.*;
 import java.util.*;
@@ -60,33 +57,97 @@ public class Tester {
 //				System.out.println(p);
 //			}		
 			
+			
 			CustomerService service=new CustomerServiceImpl();
-//			Customer c1=service.createCustomer(new Customer(2,"Sachin","Tendulkar","sachin@gmail.com"));
-//			List<Customer> l=service.getAllCustomers();
-//			for(Customer c:l){
-//				System.out.println(c);
-//			}
 			
-			Customer customer=service.findCustomerById(2);
-			if(customer==null) {
-				System.out.println("Customer with given id does not exist!");
-			}
-			else {
+			
+			Scanner sc=new Scanner(System.in);
+			
+			int choice=0;
+			
+			do {
+				System.out.println("1. Create customer");
+				System.out.println("2. Display all customers");
+				System.out.println("3. Find customer by Id");
+				System.out.println("4. Find customer by first name");	
+				System.out.println("5. Update customer by Id");
+				System.out.println("Enter your choice: ");
+						
+				choice=sc.nextInt();
+				switch (choice) {
+				case 1:
+					System.out.println("Enter first name: ");
+					String firstName=sc.next();
+					System.out.println("Enter last name: ");
+					String lastName=sc.next();
+					System.out.println("Enter email: ");
+					String email=sc.next();
+					List<Customer> l=service.getAllCustomers();
+					int id=l.size()+1;
+					Customer c1=service.createCustomer(new Customer(id,firstName,lastName,email));
+					break;
+				case 2:
+					System.out.println("All customers are given below:\n");
+					l=service.getAllCustomers();
+					for(Customer c:l){
+						System.out.println(c);
+					}
+					break;
+				case 3:
+					System.out.println("Enter customer id: ");
+					int id2=sc.nextInt();
+					Customer customer=service.findCustomerById(id2);
+					if(customer==null) {
+						System.out.println("Customer with given id does not exist!");
+					}
+					else {
+						
+						System.out.println("customer found:\n"+customer);
+					}
+					break;
+				case 4:
+					System.out.println("Enter first name: ");
+					String firstName2=sc.next();
+					List<Customer> l2=service.findCustomerByFirstName(firstName2);
+					if(l2.isEmpty()) {
+						System.out.println("Customer with given first name does not exist!");
+					}
+					else {	
+						for(Customer c:l2) {
+							System.out.println("Customers with given first name:\n"+c);
+						}
+					}
+					break;
+				case 5:
+					System.out.println("Enter customer id: ");
+					int id3=sc.nextInt();
+					System.out.println("Enter first name: ");
+					String firstName3=sc.next();
+					System.out.println("Enter last name: ");
+					String lastName2=sc.next();
+					System.out.println("Enter email: ");
+					String email2=sc.next();
+					 Customer customer2=service.updateCustomer(id3, new Customer(firstName3, lastName2, email2));
+					 if(customer2==null){
+						System.out.println("updated unsucessfully");
+					  }
+					  else{
+						System.out.println("Customer updated:\n"+customer2);
+					  }
+				case 0:
+					System.out.println("Session ended");
+					System.exit(1);
+					break;
+				default:
+					System.out.println("Invalid Choice!");
+					break;
 				
-				System.out.println("customer found:\n"+customer);
-			}
-//					
-			List<Customer> l2=service.findCustomerByFirstName("john");
-			if(l2.isEmpty()) {
-				System.out.println("Customer with given first name does not exist!");
-			}
-			else {	
-				for(Customer c:l2) {
-					System.out.println("Customers with given first name:\n"+c);
 				}
-			}
+				
+			} while(choice!=0);
 			
-////			
+			
+	
 		} catch (Exception e) {
 			
 			e.printStackTrace();

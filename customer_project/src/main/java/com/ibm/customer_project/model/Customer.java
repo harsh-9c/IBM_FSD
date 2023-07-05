@@ -13,6 +13,16 @@ public class Customer implements Serializable {
 		super();
 	}
 
+	
+	
+	public Customer(String firstName, String lastName, String email) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+
+
 	public Customer(int id, String firstName, String lastName, String email) {
 		super();
 		this.id = id;

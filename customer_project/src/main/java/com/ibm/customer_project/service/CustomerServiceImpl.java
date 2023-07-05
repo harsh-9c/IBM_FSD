@@ -51,7 +51,7 @@ private MyConnectionFactory myConnectionFactory=null;
 		pStatement.setString(3, customer.getLastName());
 		pStatement.setString(4, customer.getEmail());
 		int result=pStatement.executeUpdate();
-		System.out.println(result+" rows inserted/updated");
+		System.out.println(result+" Customer created");
 
 		return customer;
 	}
@@ -100,6 +100,35 @@ private MyConnectionFactory myConnectionFactory=null;
         else {
         	return c;
         }
+		
+	}
+
+//	5. Update customer by id
+	
+	@Override
+	public Customer updateCustomer(int id, Customer customer) throws SQLException {
+		PreparedStatement pStatement=null;
+		pStatement=connection.prepareStatement("select * from customers where customer_id=?");
+		pStatement.setInt(1, id);
+        ResultSet rs=pStatement.executeQuery();
+        
+        while(rs.next()) {
+        	customers.add(new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+        }
+		
+		if(customers.isEmpty()) {
+			return null;
+		}
+		else {
+			pStatement=connection.prepareStatement("update customers set first_name=?,last_lase=?,email=?  where customer_id=?");
+	        pStatement.setString(1, customer.getFirstName());
+			pStatement.setString(2, customer.getLastName());
+			pStatement.setString(3, customer.getEmail());
+			pStatement.setInt(4, id);
+			pStatement.executeUpdate();
+			return customer;
+			
+		}
 		
 	}
 
