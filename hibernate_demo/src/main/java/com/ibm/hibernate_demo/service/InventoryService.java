@@ -9,5 +9,7 @@ public interface InventoryService {
 	public Inventory createInventory(Inventory inventory);
 	
 	public List<Inventory> getAllInventory();
+	
+	public Inventory getInventoryById(int id);
 
 }

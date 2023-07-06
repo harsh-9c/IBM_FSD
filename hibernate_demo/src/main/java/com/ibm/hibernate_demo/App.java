@@ -31,13 +31,9 @@ public class App {
 			do {
 				System.out.println("1. Create Inventory");
 				System.out.println("2. Display all inventories");
-//				System.out.println("3. Find customer by Id");
-//				System.out.println("4. Find customer by first name");	
-//				System.out.println("5. Update customer by Id");
-//				System.out.println("6. Delete customer by Id");
-//				System.out.println("7. Delete all customers");
-//				System.out.println("0. Close the session");
+				System.out.println("3. Find inventory by id");
 				System.out.println("\nEnter your choice: ");
+				
 				choice=sc.nextInt();
 				
 				switch (choice) {
@@ -51,8 +47,8 @@ public class App {
 					String name1=sc.next();
 					System.out.println("Enter total pieces: ");
 					int totalPieces1=sc.nextInt();
-					Inventory i =service.createInventory(new Inventory(iId1,pId1,name1,totalPieces1));
-					System.out.println("Inventory created: "+i);
+					Inventory i1 =service.createInventory(new Inventory(iId1,pId1,name1,totalPieces1));
+					System.out.println("Inventory created: "+i1);
 					break;
 					
 				case 2: 
@@ -62,11 +58,18 @@ public class App {
 						System.out.println(inv);
 					}
 					
+				case 3:
+					System.out.println("Enter inventory id: ");
+					int iId2=sc.nextInt();
+					Inventory i2=service.getInventoryById(iId2);
+					System.out.println("Inventory found: "+i2);
+					break;
 					
 				case 0:
 					System.out.println("Session ended");
 					System.exit(1);
-								
+				    break;
+				    
 				default:
 					System.out.println("Invalid choice!");
 					break;

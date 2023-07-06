@@ -37,6 +37,13 @@ public class InventoryServiceImpl implements InventoryService{
 		List<Inventory> list=query.getResultList();
 		return list;
 	}
+
+	@Override
+	public Inventory getInventoryById(int id) {
+		session=sessionFactory.openSession();
+		Inventory i=session.find(Inventory.class,id);
+		return i;
+	}
 	
 	
 
