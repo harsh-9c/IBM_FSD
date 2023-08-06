@@ -1,0 +1,17 @@
+<h2>Tutorial List</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Tutorial Id</th>
+      <th>Description</th>
+      <th>Is Available(Yes/No)?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tutorial of tutorials">
+      <td>{{ tutorial.tutorialId }}</td>
+      <td>{{ tutorial.description }}</td>
+      <td>{{ tutorial.isAvailable }}</td>
+    </tr>
+  </tbody>
+</table>
