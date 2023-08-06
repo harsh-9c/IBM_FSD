@@ -1,0 +1,18 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Product Id</th>
+      <th>Product Name</th>
+      <th>Product Price</th>
+      <th>Is Available</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tempProduct of productList">
+      <td>{{ tempProduct.productId }}</td>
+      <td>{{ tempProduct.productName }}</td>
+      <td>{{ tempProduct.productPrice | currency: "INR" }}</td>
+      <td>{{ tempProduct.isAvailable }}</td>
+    </tr>
+  </tbody>
+</table>
